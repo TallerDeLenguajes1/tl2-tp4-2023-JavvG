@@ -2,6 +2,7 @@ using EspacioCadete;
 using EspacioPedido;
 using EspacioCliente;
 using EspacioAccesoADatos;
+using EspacioInforme;
 
 namespace Web_Api;
 
@@ -27,14 +28,20 @@ public class Cadeteria {
     private int telefono;
     private List<Cadete> listadoCadetes;
     private List<Pedido> listadoTotalPedidos;
+    private Informe informeCadeteria;
+
     public string Nombre { get => nombre; set => nombre = value; }
     public int Telefono { get => telefono; set => telefono = value; }
     public List<Cadete> ListadoCadetes { get => listadoCadetes; set => listadoCadetes = value; }
     public List<Pedido> ListadoTotalPedidos { get => listadoTotalPedidos; set => listadoTotalPedidos = value; }
+    public Informe InformeCadeteria { get => informeCadeteria; set => informeCadeteria = value; }
+
+
     // Métodos
     public Cadeteria() {    // Constructor por defecto, inicializa una lista de cadetes para evitar errores a posteriori
         this.ListadoCadetes = new List<Cadete>();
         this.ListadoTotalPedidos = new List<Pedido>();
+        this.InformeCadeteria = this.GetInforme();
     }
 
     public List<Pedido> GetPedidos() {
@@ -260,5 +267,10 @@ public class Cadeteria {
             recaudacion += P.Monto;
         }
         return recaudacion;
+    }
+
+    public Informe GetInforme() {
+        Informe nuevoInforme = new Informe(this.ListadoTotalPedidos, this.ListadoCadetes, this.RecaudacionTotal());
+        return nuevoInforme;
     }
 }

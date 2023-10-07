@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;     // Espacio de nombre donde está ControllerBase
 using EspacioPedido;
 using EspacioCadete;
+using EspacioInforme;
 
 namespace Web_Api.Controllers;       // Espacio de nombre 
 
@@ -38,6 +39,12 @@ public class CadeteriaController : ControllerBase {     // Clase que hereda de C
         var pedidos = cadeteria.GetPedidos();
         return Ok(pedidos);
     }
+
+    [HttpGet("Informe")]
+    public ActionResult<Informe> GetInforme() {
+        var informe = cadeteria.GetInforme();
+        return Ok(informe);
+    } 
 
     [HttpGet("Cadetes")]
     public ActionResult<List<Cadete>> GetCadetes() {
