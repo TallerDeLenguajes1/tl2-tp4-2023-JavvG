@@ -1,0 +1,20 @@
+[
+  {
+    "IdCadete": 1,
+    "Nombre": "Juan",
+    "Direccion": "San Miguel de Tucumán",
+    "Telefono": 381889900
+  },
+  {
+    "IdCadete": 2,
+    "Nombre": "José",
+    "Direccion": "San Miguel de Tucumán",
+    "Telefono": 381445566
+  },
+  {
+    "IdCadete": 3,
+    "Nombre": "Julián",
+    "Direccion": "San Miguel de Tucumán",
+    "Telefono": 381445588
+  }
+]
