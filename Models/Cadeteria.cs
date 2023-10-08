@@ -1,12 +1,14 @@
 using EspacioCadete;
 using EspacioPedido;
 using EspacioCliente;
-using EspacioAccesoADatos;
+using DatosPedidos;
 using EspacioInforme;
 
 namespace Web_Api;
 
 public class Cadeteria {
+
+    private AccesoADatosPedidos accesoDatosPedidos;      // Atributo private que indica que puede haber algún tipo de relación entre las clases "Cadetería" y "AccesoADatosPedidos"
 
     // Modificación siguiendo el patrón Singleton
     private static Cadeteria cadeteriaInstancia;     // Se crea una instancia estática y privada
@@ -35,6 +37,7 @@ public class Cadeteria {
     public List<Cadete> ListadoCadetes { get => listadoCadetes; set => listadoCadetes = value; }
     public List<Pedido> ListadoTotalPedidos { get => listadoTotalPedidos; set => listadoTotalPedidos = value; }
     public Informe InformeCadeteria { get => informeCadeteria; set => informeCadeteria = value; }
+    public AccesoADatosPedidos AccesoDatosPedidos { get => accesoDatosPedidos; set => accesoDatosPedidos = value; }
 
 
     // Métodos
@@ -42,6 +45,7 @@ public class Cadeteria {
         this.ListadoCadetes = new List<Cadete>();
         this.ListadoTotalPedidos = new List<Pedido>();
         this.InformeCadeteria = this.GetInforme();
+        this.AccesoDatosPedidos = new AccesoADatosPedidos();     // Se crea una relación de composición entre ambas clases, siempre y cuando la instancia de "AccesoADatosPedidos" se cree y gestione exclusivamente dentro del constructor de la clase "Cadeteria" y no esté disponible de forma independiente fuera de la "Cadeteria".
     }
 
     public List<Pedido> GetPedidos() {
@@ -56,6 +60,7 @@ public class Cadeteria {
 
         ListadoTotalPedidos.Add(pedido);
         pedido.Numero = this.ListadoTotalPedidos.Count();
+        AccesoDatosPedidos.Guardar(ListadoTotalPedidos);
         return pedido;
 
     }
@@ -66,7 +71,10 @@ public class Cadeteria {
         Cadete cadeteSeleccionado = this.ListadoCadetes.Find(cadete => cadete.IdCadete == IdCadete);
         
         pedidoSeleccionado.Asignado = true;
+        pedidoSeleccionado.CadeteAsignado = cadeteSeleccionado;
         cadeteSeleccionado.ListadoPedidos.Add(pedidoSeleccionado);
+
+        AccesoDatosPedidos.Guardar(ListadoTotalPedidos);
 
         return cadeteSeleccionado;
 
@@ -101,6 +109,8 @@ public class Cadeteria {
             break;
         }
 
+        AccesoDatosPedidos.Guardar(ListadoTotalPedidos);
+
         return pedidoAModificar;
 
     }
@@ -116,7 +126,8 @@ public class Cadeteria {
         Cadete cadeteAsignado = this.ListadoCadetes.Find(cadete => cadete.IdCadete == idNuevoCadete);
 
         cadeteAsignado.ListadoPedidos.Add(pedidoSeleccionado);
-
+        pedidoSeleccionado.CadeteAsignado = cadeteAsignado;
+        AccesoDatosPedidos.Guardar(ListadoTotalPedidos);
         return cadeteAsignado;
 
     }
