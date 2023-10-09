@@ -8,9 +8,9 @@ namespace DatosCadetes;
 public class AccesoADatosCadetes {
 
     public List<Cadete> Obtener() {
-        if(File.Exists("cadetes.json")) {
+        if(File.Exists(Directory.GetCurrentDirectory() + "/cadetes.json")) {
 
-            string json = File.ReadAllText("cadetes.json");
+            string json = File.ReadAllText(Directory.GetCurrentDirectory() + "/cadetes.json");
 
             List<Cadete> listaCadetes = JsonSerializer.Deserialize<List<Cadete>>(json);
 
@@ -23,5 +23,13 @@ public class AccesoADatosCadetes {
             return null;
         }
     }
+
+    public void Guardar(List<Cadete> cadetes) {
+        string json = JsonSerializer.Serialize(cadetes);
+        string path = Directory.GetCurrentDirectory() + "/cadetes.json";
+        File.WriteAllText(path, json);
+        Console.WriteLine("\n Los cadetes se han guardado en el archivo \"cadetes.json\"");
+    }
+
 
 }

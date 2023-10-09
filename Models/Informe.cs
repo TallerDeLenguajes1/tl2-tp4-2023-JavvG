@@ -22,20 +22,19 @@ public class Informe {
     public int PedidosTotales { get => pedidosTotales; set => pedidosTotales = value; }
 
     public Informe() {
-        ListaCadetes = null;
-        ListaPedidos = null;
+        ListaCadetes = new List<Cadete>();
+        ListaPedidos = new List<Pedido>();
     }
 
-    public Informe(List<Pedido> pedidos, List<Cadete> cadetes, double recaudacion) {
+    public Informe(List<Pedido> pedidos, List<Cadete> cadetes, List<Pedido> pedidosPendientes, List<Pedido> pedidosEntregados, List<Pedido> pedidosCancelados,  double recaudacion) {
 
-        ListaPedidos = pedidos;
-        PedidosPendientes = (List<Pedido>)ListaPedidos.Where(pedido => pedido.Estado == EstadoPedido.Pendiente);
-        PedidosEntregados = (List<Pedido>)ListaPedidos.Where(pedido => pedido.Estado == EstadoPedido.Entregado);
-        PedidosCancelados = (List<Pedido>)ListaPedidos.Where(pedido => pedido.Estado == EstadoPedido.Cancelado);
-
-        ListaCadetes = cadetes;
-        Recaudacion = recaudacion;
-        PedidosTotales = ListaPedidos.Count();
+        this.ListaPedidos = pedidos;
+        this.PedidosPendientes = pedidosPendientes;
+        this.PedidosEntregados = pedidosEntregados;
+        this.PedidosCancelados = pedidosCancelados;
+        this.ListaCadetes = cadetes;
+        this.Recaudacion = recaudacion;
+        this.PedidosTotales = ListaPedidos.Count();
 
     }
 }

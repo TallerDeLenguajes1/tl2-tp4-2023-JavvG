@@ -1,4 +1,4 @@
-// -- Se agregan middelwares al pipeline
+// -- Se agregan middlewares al pipeline
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,7 @@ var app = builder.Build();
 
 // Se determinan los elementos que se usarán en el pipe de la apliciación
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

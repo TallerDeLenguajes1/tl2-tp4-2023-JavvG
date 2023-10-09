@@ -8,19 +8,19 @@ public class AccesoADatosPedidos {
 
     public List<Pedido> Obtener() {
 
-        if(File.Exists("pedidos.json")) {
+        if(File.Exists(Directory.GetCurrentDirectory() + "/pedidos.json")) {
 
-            string json = File.ReadAllText("pedidos.json");
+            string json = File.ReadAllText(Directory.GetCurrentDirectory() + "/pedidos.json");
 
             List<Pedido> listadoPedidos = JsonSerializer.Deserialize<List<Pedido>>(json);
 
-            Console.WriteLine("\n Datos de los cadetes leídos correctamente");
+            Console.WriteLine("\n Datos de los pedidos leídos correctamente");
 
             return listadoPedidos;
 
         }
         else {
-            Console.WriteLine("\n\n (!) No ha podido encontrarse el archivo de datos (cadetes.json)");
+            Console.WriteLine("\n\n (!) No ha podido encontrarse el archivo de datos (pedidos.json)");
             return null;
         }
 

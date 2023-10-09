@@ -7,23 +7,21 @@ namespace DatosCadeteria;
 public class AccesoADatosCadeteria {
 
     public Cadeteria Obtener() {
+        if(File.Exists(Directory.GetCurrentDirectory() + "/cadeteria.json")) {
 
-        if(File.Exists("cadeteria.json")) {
+            string json = File.ReadAllText(Directory.GetCurrentDirectory() + "/cadeteria.json");
 
-            string json = File.ReadAllText("cadeteria.json");
+            List<Cadeteria> lista = JsonSerializer.Deserialize<List<Cadeteria>>(json);
 
-            Cadeteria cadeteria = JsonSerializer.Deserialize<Cadeteria>(json);       // Se añaden los datos leídos del archivo JSON a un arreglo
+            Console.WriteLine("\n Datos de los cadeteria leídos correctamente");
 
-            Console.WriteLine("\n Datos de la cadetería leídos correctamente");
-
-            return cadeteria;
-
+            return lista[0];
         }
         else {
             Console.WriteLine("\n\n (!) No ha podido encontrarse el archivo de datos (cadeteria.json)");
             return null;
         }
-        
     }
+
 
 }

@@ -20,7 +20,7 @@ namespace EspacioPedido {
         private EstadoPedido estado;
         private double monto;
         private bool asignado;
-        private Cadete cadeteAsignado;
+        //private Cadete cadeteAsignado;
 
         public int Numero { get => numero; set => numero = value; }
         public string Observaciones { get => observaciones; set => observaciones = value; }
@@ -28,21 +28,21 @@ namespace EspacioPedido {
         public EstadoPedido Estado { get => estado; set => estado = value; }
         public bool Asignado { get => asignado; set => asignado = value; }
         public double Monto { get => monto; set => monto = value; }
-        public Cadete CadeteAsignado { get => cadeteAsignado; set => cadeteAsignado = value; }
+        //public Cadete CadeteAsignado { get => cadeteAsignado; set => cadeteAsignado = value; }
 
         public Pedido() {       // Cada vez que se crea un pedido, se crea en estado "Pendiente"
             this.Estado = EstadoPedido.Pendiente;
             this.Asignado = false;
         }
 
-        public Pedido(int numero, string observaciones, Cliente cliente, EstadoPedido estado, bool asignado, double monto, Cadete cadete) {
+        public Pedido(int numero, string observaciones, Cliente cliente, EstadoPedido estado, bool asignado, double monto) {
             this.Numero = numero;
             this.Observaciones = observaciones;
             this.Cliente = cliente;
             this.Estado = estado;
             this.Asignado = asignado;
             this.Monto = monto;
-            this.CadeteAsignado = cadete;
+            //this.CadeteAsignado = cadete;
         }
 
         public void VerDatosCliente() {
@@ -86,9 +86,9 @@ namespace EspacioPedido {
                 break;
 
             }
-            Console.WriteLine("\t Cadete Asignado:}");
+            /* Console.WriteLine("\t Cadete Asignado:}");
             this.CadeteAsignado.VerDatosCadete();
-            Console.Write("\n\n");
+            Console.Write("\n\n"); */
         }
 
         public string VerDireccionCliente() {
